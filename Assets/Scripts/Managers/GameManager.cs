@@ -1,5 +1,4 @@
-using System;
-using Enums;
+﻿using Enums;
 using Signals;
 using UnityEngine;
 
@@ -16,6 +15,7 @@ namespace Managers
         #endregion
 
         #endregion
+
 
         private void OnEnable() => SubscribeEvents();
 
@@ -35,10 +35,5 @@ namespace Managers
         {
             states = state;
         }
-        // bitwise operatorleri anlatilacak..
-        
-        // mulakat sorulari ...
-        // start coroutine olur mu
-        // start butun awake leri bekler mi
     }
 }
