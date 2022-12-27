@@ -33,8 +33,12 @@ MonoBehaviour:
     - Cinemachine
     - Assembly-CSharp
     - Sirenix.OdinInspector.CompatibilityLayer
+    - RuntimeTestAssembly
+    - NonConvexCollider
+    - NonConvexColliderRuntimeAPI
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - PPv2URPConverters
+    - NonConvexEditor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
