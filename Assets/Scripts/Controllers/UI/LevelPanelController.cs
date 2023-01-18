@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using UnityEditorInternal;
 
 namespace Controllers.UI
 {
@@ -16,6 +17,7 @@ namespace Controllers.UI
         #region Serialized Variables
 
         [SerializeField] private List<TextMeshProUGUI> levelTexts = new List<TextMeshProUGUI>();
+        [SerializeField] private TextMeshProUGUI gemText = new TextMeshProUGUI();
         [Space] [SerializeField] private List<Image> stageImages = new List<Image>();
 
         #endregion
@@ -32,6 +34,8 @@ namespace Controllers.UI
             UISignals.Instance.onSetNewLevelValue += OnSetNewLevelValue;
             UISignals.Instance.onSetStageColor += OnSetStageColor;
             UISignals.Instance.onResetStageColor += OnResetStageColor;
+            UISignals.Instance.onSetGem += OnSetGem;
+
         }
 
         private void UnSubscribeEvents()
@@ -39,6 +43,7 @@ namespace Controllers.UI
             UISignals.Instance.onSetNewLevelValue -= OnSetNewLevelValue;
             UISignals.Instance.onSetStageColor -= OnSetStageColor;
             UISignals.Instance.onResetStageColor -= OnResetStageColor;
+            UISignals.Instance.onSetGem -= OnSetGem;
         }
 
         private void OnDisable()
@@ -61,16 +66,11 @@ namespace Controllers.UI
             stageImages[stageValue].DOColor(Color.red, .35f).SetEase(Ease.Linear);
         }
 
-
-        // private void OnResetStageColor()
-        // {
-        //     foreach (var VARIABLE in stageImages)
-        //     {
-        //         stageImages[Image].DOColor(Color.white, .05f).SetEase(Ease.Linear);
-        //     }
-        //     
-        //     
-        // }
+        private void OnSetGem(int amountGem)
+        {
+            int gem = amountGem;
+            gemText.text = "Gem : "+ gem.ToString();
+        }
         
         private void OnResetStageColor()
         {

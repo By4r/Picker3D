@@ -129,10 +129,6 @@ namespace Controllers.Player
             _isReadyToMove = false;
             _isReadyToBoost = false;
         }
-
-        internal void OnContinue()
-        {
-            
-        }
+        
     }
 }

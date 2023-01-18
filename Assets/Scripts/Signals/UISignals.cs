@@ -9,5 +9,6 @@ namespace Signals
         public UnityAction<int> onSetNewLevelValue = delegate { };
         public UnityAction<int> onSetStageColor = delegate { };
         public UnityAction onResetStageColor = delegate { };
+        public UnityAction<int> onSetGem = delegate {  };
     }
 }

@@ -1,19 +1,12 @@
-using Controllers.Player;
 using UnityEngine;
 using UnityEngine.UI;
 using Signals;
-using Controllers.Pool;
 
 namespace Managers
 {
     public class ManaBar : MonoBehaviour
     {
-        [SerializeField] private PlayerPhysicsController playerPhysicsController;
-
-        [SerializeField] private PoolController poolController;
         [SerializeField] private int _requiredAmount;
-
-        public static ManaBar instance;
 
         #region BarVariables
 
@@ -30,21 +23,9 @@ namespace Managers
 
         #endregion
 
-
-        public static ManaBar Instance { get; private set; }
-
         private void Awake()
         {
-            isDecrease = false;
-
-            if (Instance != null && Instance != this)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                Instance = this;
-            }
+            // isDecrease = false;
 
             barMaskRectTransform = transform.Find("barMask").GetComponent<RectTransform>();
             barRawImage = transform.Find("barMask").Find("bar").GetComponent<RawImage>();
@@ -78,15 +59,11 @@ namespace Managers
             CoreGameSignals.Instance.onPoolRequiredAmountChanged -= OnPoolRequiredAmountChanged;
             CoreGameSignals.Instance.onDecreaseMana -= OnDecreaseMana;
             CoreGameSignals.Instance.onOverBar -= OnOverBar;
-            //isStarted = false;
         }
 
         private void Update()
         {
             ManaBarWork();
-
-            Debug.Log("MANA MAX DEGERI: " + MANA_MAX);
-            Debug.Log("mana Amount: " + manaAmount);
         }
 
         private void ManaBarWork()
@@ -138,13 +115,12 @@ namespace Managers
             }
         }
 
-
         private void OnPoolRequiredAmountChanged(int requiredAmount)
         {
             _requiredAmount = requiredAmount;
         }
 
-        private float GetManaNormalized()
+        public float GetManaNormalized()
         {
             return manaAmount / MANA_MAX;
         }

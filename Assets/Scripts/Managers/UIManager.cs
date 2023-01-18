@@ -38,8 +38,6 @@ namespace Managers
         public void NextLevel()
         {
             CoreGameSignals.Instance.onNextLevel?.Invoke();
-            //CoreGameSignals.Instance.onReset?.Invoke();
-            Debug.Log("Next Level'e basildi");
         }
 
         public void RestartLevel()
@@ -83,13 +81,5 @@ namespace Managers
             CoreUISignals.Instance.onCloseAllPanels?.Invoke();
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
         }
-        
-        
-
-        // private void OnReset()
-        // {
-        //     CoreUISignals.Instance.onCloseAllPanels?.Invoke(); 
-        //     CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
-        // }
     }
 }

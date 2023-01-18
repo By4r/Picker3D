@@ -54,12 +54,14 @@ namespace Managers
         {
             return Resources.Load<CD_Player>("Data/CD_Player").Data;
         }
-
+        
+        
         private void SendDataToControllers()
         {
             movementController.SetMovementData(_data.MovementData);
             meshController.SetMeshData(_data.ScaleData);
         }
+        
 
         private void OnEnable()
         {
@@ -122,7 +124,6 @@ namespace Managers
         private void OnLevelSuccessful()
         {
             movementController.IsReadyToPlay(false);
-            //movementController.IsReadyToBoost(false);
         }
         
         private void OnLevelFailed()

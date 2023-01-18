@@ -20,3 +20,5 @@ MonoBehaviour:
       MiniGameMultiplier: 2
     ScaleData:
       ScaleFactor: 1.2
+    GemData:
+      Gem: 0

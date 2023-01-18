@@ -6,6 +6,5 @@
         Win,
         Start,
         Level,
-        Mini,
     }
 }

@@ -7,11 +7,13 @@ namespace Data.ValueObjects
     {
         public MovementData MovementData;
         public ScaleData ScaleData;
-
-        public PlayerData(MovementData movementData, ScaleData scaleData)
+        public GemData GemData;
+        
+        public PlayerData(MovementData movementData, ScaleData scaleData,GemData gemData)
         {
             MovementData = movementData;
             ScaleData = scaleData;
+            GemData = gemData;
         }
     }
 
@@ -41,6 +43,17 @@ namespace Data.ValueObjects
         public ScaleData(float scaleFactor)
         {
             ScaleFactor = scaleFactor;
+        }
+    }
+    
+    [Serializable]
+    public struct GemData
+    {
+        public int Gem;
+
+        public GemData(int gem)
+        {
+            Gem = gem;
         }
     }
 }

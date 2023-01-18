@@ -2,6 +2,7 @@
 using Signals;
 using Managers;
 using Controllers.Pool;
+using Data.ValueObjects;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 
@@ -12,18 +13,15 @@ namespace Controllers.Player
         #region Self Variables
 
         #region Serialized Variables
-    
+        
         [SerializeField] private PlayerManager manager;
-        [SerializeField] private LevelManager  levelManager;
-
-        [SerializeField] private new Collider collider;
-        [SerializeField] private new Rigidbody rigidbody;
 
         #endregion
         
         #region Private Variables
         
         [ShowInInspector] private bool _isOver;
+        [ShowInInspector] private GemData _data;
         
         #endregion
         
@@ -56,21 +54,33 @@ namespace Controllers.Player
             }
             if (other.CompareTag("Finish"))
             {
-                //levelManager.levelID++;
                 CoreGameSignals.Instance.onContinue?.Invoke();
                 UISignals.Instance.onResetStageColor?.Invoke();
                 CoreGameSignals.Instance.onDecreaseMana?.Invoke();
-                //UISignals.Instance.onSetNewLevelValue?.Invoke(levelManager.levelID);
             }
             if (other.CompareTag("Collectable"))
             {
                 CoreGameSignals.Instance.onCollectableCollected?.Invoke();
             }
             if (other.CompareTag("Gem"))
-            {   
-                Debug.Log("COREGAMESINYALI ONOVERBAR");
-                
+            {
                 CoreGameSignals.Instance.onOverBar?.Invoke();
+
+                if (other.gameObject.name == "100")
+                {
+                    _data.Gem = 100;
+                }
+                if (other.gameObject.name == "200")
+                {
+                    _data.Gem = 200;
+                }
+
+                if (other.gameObject.name == "300")
+                {
+                    _data.Gem = 300;
+                }
+                
+                SendDataToController(_data);
             }
             if (other.CompareTag("Boost"))
             {
@@ -78,8 +88,12 @@ namespace Controllers.Player
             }
             
         }
-        
-        
+
+        private void SendDataToController(GemData gemData)
+        {
+            var data = gemData.Gem;
+            UISignals.Instance.onSetGem?.Invoke(data);
+        }
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
