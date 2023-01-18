@@ -14,6 +14,7 @@ namespace Managers
 
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onLevelContinue += OnLevelContinue;
             CoreGameSignals.Instance.onLevelInitialize += OnLevelInitialize;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
@@ -22,6 +23,7 @@ namespace Managers
 
         private void UnSubscribeEvents()
         {
+            CoreGameSignals.Instance.onLevelContinue -= OnLevelContinue;
             CoreGameSignals.Instance.onLevelInitialize -= OnLevelInitialize;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
@@ -32,11 +34,12 @@ namespace Managers
         {
             UnSubscribeEvents();
         }
-
+        
         public void NextLevel()
         {
             CoreGameSignals.Instance.onNextLevel?.Invoke();
-            CoreGameSignals.Instance.onReset?.Invoke();
+            //CoreGameSignals.Instance.onReset?.Invoke();
+            Debug.Log("Next Level'e basildi");
         }
 
         public void RestartLevel()
@@ -52,6 +55,12 @@ namespace Managers
             CameraSignals.Instance.onSetCameraTarget?.Invoke();
         }
 
+        private void OnLevelContinue(int levelValue)
+        {
+            
+            UISignals.Instance.onSetNewLevelValue?.Invoke(levelValue);
+        }
+        
         private void OnLevelInitialize(int levelValue)
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 0);
@@ -74,5 +83,13 @@ namespace Managers
             CoreUISignals.Instance.onCloseAllPanels?.Invoke();
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
         }
+        
+        
+
+        // private void OnReset()
+        // {
+        //     CoreUISignals.Instance.onCloseAllPanels?.Invoke(); 
+        //     CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
+        // }
     }
 }

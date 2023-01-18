@@ -24,7 +24,7 @@ namespace Controllers.Player
 
         [ShowInInspector] private MovementData _data;
 
-        [ShowInInspector] private bool _isReadyToMove, _isReadyToPlay;
+        [ShowInInspector] private bool _isReadyToMove, _isReadyToPlay,_isReadyToBoost;
 
         private float _xValue;
         private float2 _clampValues;
@@ -45,14 +45,21 @@ namespace Controllers.Player
                 StopPlayer();
                 return;
             }
-
+            
             if (_isReadyToMove)
             {
                 MovePlayer();
+                
             }
             else
             {
                 StopPlayerHorizontaly();
+            }
+            
+            
+            if (_isReadyToBoost)
+            {
+                MoveBoost();
             }
         }
 
@@ -61,8 +68,9 @@ namespace Controllers.Player
             var velocity = rigidbody.velocity;
             velocity = new float3(_xValue * _data.SidewaysSpeed, velocity.y,
                 _data.ForwardSpeed);
+            
             rigidbody.velocity = velocity;
-
+            
             float3 position;
             position = new float3(
                 Mathf.Clamp(rigidbody.position.x, _clampValues.x,
@@ -71,7 +79,15 @@ namespace Controllers.Player
                 position.z);
             rigidbody.position = position;
         }
-
+        
+        private void MoveBoost()
+        {
+            var velocity = rigidbody.velocity;
+            velocity = new float3(_xValue * _data.SidewaysSpeed, velocity.y,
+                _data.ForwardSpeed);
+            rigidbody.velocity = velocity * _data.MiniGameMultiplier;
+        }
+        
         private void StopPlayerHorizontaly()
         {
             rigidbody.velocity = new float3(0, rigidbody.velocity.y, _data.ForwardSpeed);
@@ -94,6 +110,11 @@ namespace Controllers.Player
             _isReadyToMove = condition;
         }
 
+        internal void IsReadyToBoost(bool condition)
+        {
+            _isReadyToBoost = condition;
+        }
+
         internal void UpdateInputParams(HorizontalnputParams inputParams)
         {
             _xValue = inputParams.HorizontalInputValue;
@@ -106,6 +127,12 @@ namespace Controllers.Player
             StopPlayer();
             _isReadyToPlay = false;
             _isReadyToMove = false;
+            _isReadyToBoost = false;
+        }
+
+        internal void OnContinue()
+        {
+            
         }
     }
 }

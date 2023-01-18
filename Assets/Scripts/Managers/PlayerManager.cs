@@ -1,5 +1,6 @@
 using Command.Player;
 using Controllers.Player;
+using Controllers.Pool;
 using Data.UnityObjects;
 using Data.ValueObjects;
 using Signals;
@@ -24,6 +25,8 @@ namespace Managers
         [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerPhysicsController physicsController;
         [SerializeField] private PlayerMeshController meshController;
+        [SerializeField] private PoolController poolController;
+        [SerializeField] private ManaBar manaBar;
 
         #endregion
 
@@ -74,6 +77,7 @@ namespace Managers
             CoreGameSignals.Instance.onStageAreaEntered += OnStageAreaEntered;
             CoreGameSignals.Instance.onStageAreaSuccessful += OnStageAreaSuccessful;
             CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onContinue += OnContinue;
         }
 
         private void UnSubscribeEvents()
@@ -87,13 +91,19 @@ namespace Managers
             CoreGameSignals.Instance.onStageAreaEntered -= OnStageAreaEntered;
             CoreGameSignals.Instance.onStageAreaSuccessful -= OnStageAreaSuccessful;
             CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onContinue -= OnContinue;
         }
 
         private void OnDisable()
         {
             UnSubscribeEvents();
         }
-
+        
+        private void OnContinue()
+        {
+            movementController.IsReadyToBoost(true);
+        }
+        
         private void OnPlay()
         {
             movementController.IsReadyToPlay(true);
@@ -112,8 +122,9 @@ namespace Managers
         private void OnLevelSuccessful()
         {
             movementController.IsReadyToPlay(false);
+            //movementController.IsReadyToBoost(false);
         }
-
+        
         private void OnLevelFailed()
         {
             movementController.IsReadyToPlay(false);
@@ -136,5 +147,6 @@ namespace Managers
             meshController.OnReset();
             physicsController.OnReset();
         }
+        
     }
 }

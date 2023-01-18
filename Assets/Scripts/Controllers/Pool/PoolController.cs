@@ -46,7 +46,8 @@ namespace Controllers.Pool
         }
 
         private void OnEnable()
-        {
+        {   
+            SendRequiredAmount();
             SubscribeEvents();
         }
 
@@ -67,8 +68,9 @@ namespace Controllers.Pool
 
         private void Start()
         {
-            SetRequiredAmountToText();
+            //SetRequiredAmountToText();
         }
+        
 
         private void OnActivateAllAnimations(byte stageID)
         {
@@ -112,8 +114,14 @@ namespace Controllers.Pool
             if (!other.CompareTag("Collectable")) return;
             DecreaseCollectedAmount();
             SetCollectedAmountToText();
+            SendRequiredAmount();
         }
-
+        
+        public void SendRequiredAmount()
+        {
+            CoreGameSignals.Instance.onPoolRequiredAmountChanged?.Invoke(_requiredAmount);
+        }
+        
         public bool TakeStageResult(byte managerStageID)
         {
             if (stageID == managerStageID)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data.ValueObjects;
 using DG.Tweening;
 using Signals;
 using TMPro;
@@ -30,19 +31,21 @@ namespace Controllers.UI
         {
             UISignals.Instance.onSetNewLevelValue += OnSetNewLevelValue;
             UISignals.Instance.onSetStageColor += OnSetStageColor;
+            UISignals.Instance.onResetStageColor += OnResetStageColor;
         }
 
         private void UnSubscribeEvents()
         {
             UISignals.Instance.onSetNewLevelValue -= OnSetNewLevelValue;
             UISignals.Instance.onSetStageColor -= OnSetStageColor;
+            UISignals.Instance.onResetStageColor -= OnResetStageColor;
         }
 
         private void OnDisable()
         {
             UnSubscribeEvents();
         }
-
+        
         private void OnSetNewLevelValue(int levelValue)
         {
             if (levelValue <= 0) levelValue = 1;
@@ -57,5 +60,25 @@ namespace Controllers.UI
         {
             stageImages[stageValue].DOColor(Color.red, .35f).SetEase(Ease.Linear);
         }
+
+
+        // private void OnResetStageColor()
+        // {
+        //     foreach (var VARIABLE in stageImages)
+        //     {
+        //         stageImages[Image].DOColor(Color.white, .05f).SetEase(Ease.Linear);
+        //     }
+        //     
+        //     
+        // }
+        
+        private void OnResetStageColor()
+        {
+            for (int i = 0; i < stageImages.Count; i++)
+            {
+                stageImages[i].color = Color.white;
+            }
+        }
+
     }
 }

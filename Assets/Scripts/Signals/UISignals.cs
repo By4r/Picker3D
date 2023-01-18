@@ -1,4 +1,5 @@
 ﻿using Extensions;
+using Unity.VisualScripting;
 using UnityEngine.Events;
 
 namespace Signals
@@ -7,5 +8,6 @@ namespace Signals
     {
         public UnityAction<int> onSetNewLevelValue = delegate { };
         public UnityAction<int> onSetStageColor = delegate { };
+        public UnityAction onResetStageColor = delegate { };
     }
 }

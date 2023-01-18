@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 6467165669467704083}
+  levelManager: {fileID: 0}
   collider: {fileID: 0}
   rigidbody: {fileID: 0}
 --- !u!1 &6467165669467704081
@@ -235,6 +236,8 @@ MonoBehaviour:
   movementController: {fileID: 6467165669467704082}
   physicsController: {fileID: 6467165668857814204}
   meshController: {fileID: 6467165668329583645}
+  poolController: {fileID: 0}
+  manaBar: {fileID: 0}
 --- !u!114 &6467165669467704082
 MonoBehaviour:
   m_ObjectHideFlags: 0

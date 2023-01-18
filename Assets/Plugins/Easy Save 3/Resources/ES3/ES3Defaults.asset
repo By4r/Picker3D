@@ -29,22 +29,22 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Boxophobic.PolyverseSkies.Runtime
+    - Assembly-CSharp
     - Cinemachine
     - sc.stylizedwater2.runtime
     - Boxophobic.Utils.Scripts
-    - sc.stylizedwater2.editor
-    - Sirenix.OdinInspector.CompatibilityLayer
     - RuntimeTestAssembly
-    - NonConvexCollider
+    - sc.stylizedwater2.editor
     - Boxophobic.PolyverseSkies.Scripts
+    - NonConvexCollider
     - NonConvexColliderRuntimeAPI
-    - Sirenix.OdinInspector.CompatibilityLayer.Editor
+    - Sirenix.OdinInspector.CompatibilityLayer
     - Boxophobic.Utils.Editor
     - PPv2URPConverters
     - NonConvexEditor
+    - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - Boxophobic.PolyverseSkies.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0

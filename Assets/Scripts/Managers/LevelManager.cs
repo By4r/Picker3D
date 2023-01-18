@@ -13,7 +13,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private Transform levelHolder;
-        [SerializeField] private int levelID;
+        [SerializeField] internal int levelID;
 
         #endregion
 
